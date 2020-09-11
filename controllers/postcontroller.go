@@ -1,0 +1,85 @@
+package controllers
+
+import (
+	"encoding/json"
+	"goblog/models"
+	u "goblog/utils"
+	"net/http"
+	"strconv"
+)
+
+var AllPost = func(w http.ResponseWriter, r *http.Request) {
+
+	data := models.AllPost()
+	resp := u.Message(true, "success")
+	resp["data"] = data
+	u.Respond(w, resp)
+	// fmt.Fprintf(w, "Rest API With GoLang")
+
+}
+
+var CreatePost = func(w http.ResponseWriter, r *http.Request) {
+
+	user := r.Context().Value("user").(uint)
+	post := &models.Post{}
+	w.Header().Set("Content-Type", "application/json")
+	err := json.NewDecoder(r.Body).Decode(post)
+	if err != nil {
+		u.Respond(w, u.Message(false, "Error while decoding request body"))
+		return
+	}
+
+	post.UserId = user
+	resp := post.Create()
+	u.Respond(w, resp)
+}
+
+var GetPost = func(w http.ResponseWriter, r *http.Request) {
+
+	// params := mux.Vars(r)
+	id, err := strconv.Atoi(r.PostFormValue("id"))
+	if err != nil {
+		//The passed path parameter is not an integer
+		u.Respond(w, u.Message(false, "There was an error in your request"))
+		return
+	}
+
+	data := models.GetPostByUser(uint(id))
+	resp := u.Message(true, "success")
+	resp["data"] = data
+	u.Respond(w, resp)
+}
+
+var UpdatePost = func(w http.ResponseWriter, r *http.Request) {
+
+	user := r.Context().Value("user").(uint)
+	post := &models.Post{}
+
+	err := json.NewDecoder(r.Body).Decode(post)
+	if err != nil {
+		u.Respond(w, u.Message(false, "Error while decoding request body"))
+		return
+	}
+
+	post.UserId = user
+	resp := post.Update()
+	u.Respond(w, resp)
+
+}
+
+var DeletePost = func(w http.ResponseWriter, r *http.Request) {
+
+	user := r.Context().Value("user").(uint)
+	post := &models.Post{}
+
+	err := json.NewDecoder(r.Body).Decode(post)
+	if err != nil {
+		u.Respond(w, u.Message(false, "Error while decoding request body"))
+		return
+	}
+
+	post.UserId = user
+	resp := post.Delete()
+	u.Respond(w, resp)
+
+}
