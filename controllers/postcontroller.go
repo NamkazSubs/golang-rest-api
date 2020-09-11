@@ -2,10 +2,11 @@ package controllers
 
 import (
 	"encoding/json"
-	"goblog/models"
-	u "goblog/utils"
 	"net/http"
 	"strconv"
+
+	"github.com/NamkazSubs/golang-rest-api/models"
+	u "github.com/NamkazSubs/golang-rest-api/utils"
 )
 
 var AllPost = func(w http.ResponseWriter, r *http.Request) {

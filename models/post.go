@@ -2,7 +2,8 @@ package models
 
 import (
 	"fmt"
-	u "goblog/utils"
+
+	u "github.com/NamkazSubs/golang-rest-api/utils"
 
 	"github.com/jinzhu/gorm"
 )

@@ -1,4 +1,4 @@
-module github.com/NamkazSubs/golang-rest-api
+module goblog
 
 go 1.15
 

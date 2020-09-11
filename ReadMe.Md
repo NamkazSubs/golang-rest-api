@@ -1,7 +1,5 @@
 # Golang Rest Api
 
-![Version](https://img.shields.io/github/package-json/v/oruyanke/fubuki-button)
-
 > Golang Rest Api With JWT & MYSQL
 
 ## Rest Api

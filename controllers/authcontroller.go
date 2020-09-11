@@ -3,9 +3,10 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"goblog/models"
-	u "goblog/utils"
 	"net/http"
+
+	"github.com/NamkazSubs/golang-rest-api/models"
+	u "github.com/NamkazSubs/golang-rest-api/utils"
 )
 
 var CreateAccount = func(w http.ResponseWriter, r *http.Request) {

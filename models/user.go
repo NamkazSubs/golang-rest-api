@@ -1,9 +1,10 @@
 package models
 
 import (
-	u "goblog/utils"
 	"os"
 	"strings"
+
+	u "github.com/NamkazSubs/golang-rest-api/utils"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/jinzhu/gorm"

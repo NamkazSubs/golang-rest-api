@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"goblog/config"
-	"goblog/controllers"
 	"net/http"
 	"os"
+
+	"github.com/NamkazSubs/golang-rest-api/config"
+	"github.com/NamkazSubs/golang-rest-api/controllers"
 
 	"github.com/gorilla/mux"
 )

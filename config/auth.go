@@ -3,11 +3,13 @@ package config
 import (
 	"context"
 	"fmt"
-	"goblog/models"
-	u "goblog/utils"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/NamkazSubs/golang-rest-api/models"
+
+	u "github.com/NamkazSubs/golang-rest-api/utils"
 
 	jwt "github.com/dgrijalva/jwt-go"
 )
