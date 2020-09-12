@@ -45,7 +45,7 @@ var GetPost = func(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data := models.GetPostByUser(uint(id))
+	data := models.GetPost(uint(id))
 	resp := u.Message(true, "success")
 	resp["data"] = data
 	u.Respond(w, resp)
