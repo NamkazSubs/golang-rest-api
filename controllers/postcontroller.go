@@ -30,7 +30,7 @@ var CreatePost = func(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	post.UserId = user
+	post.UserID = user
 	resp := post.Create()
 	u.Respond(w, resp)
 }
@@ -62,7 +62,7 @@ var UpdatePost = func(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	post.UserId = user
+	post.UserID = user
 	resp := post.Update()
 	u.Respond(w, resp)
 
@@ -79,7 +79,7 @@ var DeletePost = func(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	post.UserId = user
+	post.UserID = user
 	resp := post.Delete()
 	u.Respond(w, resp)
 

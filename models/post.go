@@ -13,7 +13,8 @@ type Post struct {
 	Title   string `json:"title"`
 	Slug    string `json:"slug"`
 	Content string `gorm:"type:text"|json:"content"`
-	UserId  uint   `json:"user_id"`
+	UserID  uint
+	// User    User `gorm:"foreignKey:UserID"`
 }
 
 /*
@@ -33,7 +34,7 @@ func (post *Post) Validate() (map[string]interface{}, bool) {
 		return u.Message(false, "Content Wajib Diisi"), false
 	}
 
-	if post.UserId <= 0 {
+	if post.UserID <= 0 {
 		return u.Message(false, "User Invalid"), false
 	}
 
@@ -60,7 +61,7 @@ func (post *Post) ValidateUpdate() (map[string]interface{}, bool) {
 		return u.Message(false, "Invalid"), false
 	}
 
-	if post.UserId <= 0 {
+	if post.UserID <= 0 {
 		return u.Message(false, "User Invalid"), false
 	}
 
@@ -74,7 +75,7 @@ func (post *Post) Validate_Delete() (map[string]interface{}, bool) {
 	if post.ID <= 0 {
 		return u.Message(false, "User Invalid"), false
 	}
-	if post.UserId <= 0 {
+	if post.UserID <= 0 {
 		return u.Message(false, "User Invalid"), false
 	}
 
@@ -108,9 +109,10 @@ func (post *Post) Create() map[string]interface{} {
 }
 
 func GetPost(id uint) *Post {
+	fmt.Println(id)
 
 	post := &Post{}
-	err := GetDB().Table("Posts").Where("id = ?", id).First(post).Error
+	err := GetDB().Table("posts").Where("id = ?", id).First(post).Error
 	if err != nil {
 		return nil
 	}
@@ -120,7 +122,7 @@ func GetPost(id uint) *Post {
 func GetPostByUser(user uint) []*Post {
 
 	post := make([]*Post, 0)
-	err := GetDB().Table("Posts").Where("user_id = ?", user).Find(&post).Error
+	err := GetDB().Table("posts").Where("user_id = ?", user).Find(&post).Error
 	if err != nil {
 		fmt.Println(err)
 		return nil
