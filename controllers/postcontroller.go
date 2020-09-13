@@ -3,7 +3,6 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
-	"strconv"
 
 	"github.com/NamkazSubs/golang-rest-api/models"
 	u "github.com/NamkazSubs/golang-rest-api/utils"
@@ -38,14 +37,15 @@ var CreatePost = func(w http.ResponseWriter, r *http.Request) {
 var GetPost = func(w http.ResponseWriter, r *http.Request) {
 
 	// params := mux.Vars(r)
-	id, err := strconv.Atoi(r.PostFormValue("id"))
+	post := &models.Post{}
+	w.Header().Set("Content-Type", "application/json")
+	err := json.NewDecoder(r.Body).Decode(post)
 	if err != nil {
-		//The passed path parameter is not an integer
-		u.Respond(w, u.Message(false, "There was an error in your request"))
+		u.Respond(w, u.Message(false, "Error while decoding request body"))
 		return
 	}
 
-	data := models.GetPost(uint(id))
+	data := models.GetPost(post.ID)
 	resp := u.Message(true, "success")
 	resp["data"] = data
 	u.Respond(w, resp)

@@ -10,6 +10,7 @@ import (
 
 type Post struct {
 	gorm.Model
+	ID      uint   `json:"id,string"`
 	Title   string `json:"title"`
 	Slug    string `json:"slug"`
 	Content string `gorm:"type:text"|json:"content"`
